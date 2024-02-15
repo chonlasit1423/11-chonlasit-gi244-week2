@@ -3648,7 +3648,7 @@ GameObject:
   - component: {fileID: 8584407567069214993}
   - component: {fileID: 3498281081872643227}
   m_Layer: 6
-  m_Name: Soldier cab
+  m_Name: Soldier ske
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3766,7 +3766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   unitName: 
-  unitPic: {fileID: 0}
+  unitPic: {fileID: 21300000, guid: dc45d0a635a83d24cb3a1b0a71beab7d, type: 3}
   curHP: 0
   maxHP: 100
   moveSpeed: 5
@@ -3784,6 +3784,8 @@ MonoBehaviour:
     gold: 20
     stone: 0
   unitWaitTime: 0.01
+  isBuilder: 0
+  builder: {fileID: 0}
 --- !u!114 &3498281081872643227
 MonoBehaviour:
   m_ObjectHideFlags: 0
