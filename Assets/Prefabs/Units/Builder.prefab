@@ -2044,7 +2044,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3945990161945114074
 Transform:
   m_ObjectHideFlags: 0
@@ -3515,7 +3515,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5384741093678871589
 Transform:
   m_ObjectHideFlags: 0
@@ -3647,8 +3647,9 @@ GameObject:
   - component: {fileID: 5970366872594439998}
   - component: {fileID: 8584407567069214993}
   - component: {fileID: 3498281081872643227}
+  - component: {fileID: 3328104595666609230}
   m_Layer: 6
-  m_Name: Soldier ske
+  m_Name: Builder
   m_TagString: Unit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3764,9 +3765,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72587d62ce3050c4b9dea581ee96cda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
+  id: 2
   unitName: 
-  unitPic: {fileID: 21300000, guid: dc45d0a635a83d24cb3a1b0a71beab7d, type: 3}
+  unitPic: {fileID: 21300000, guid: 49f38a9dd5d2d964b9eecd27f4a05679, type: 3}
   curHP: 0
   maxHP: 100
   moveSpeed: 5
@@ -3784,7 +3785,7 @@ MonoBehaviour:
     gold: 20
     stone: 0
   unitWaitTime: 0.01
-  isBuilder: 0
+  isBuilder: 1
   builder: {fileID: 0}
 --- !u!114 &3498281081872643227
 MonoBehaviour:
@@ -3798,6 +3799,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a63b2160e9eab7541854e27fb8336b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3328104595666609230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5227177240495252994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45eec97111dbe4b4e8c7eb1d3d5cdf66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toBuild: 0
+  showGhost: 0
+  buildingList:
+  - {fileID: 5622076475031477337, guid: 504b9c18e43034249ae9e5eccbd1f941, type: 3}
+  - {fileID: 1227681272056947765, guid: aa55957a38522474fbd8f9e31c4074d7, type: 3}
+  ghostBuildingList:
+  - {fileID: 5622076475031477337, guid: ba29fa5a9020b4549b6e3818c128b5b6, type: 3}
+  - {fileID: 1227681272056947765, guid: b76238b4a13d0b14493723bb15da506d, type: 3}
+  newBuilding: {fileID: 0}
+  ghostBuilding: {fileID: 0}
+  inProgressBuilding: {fileID: 0}
 --- !u!1 &5348547719988546827
 GameObject:
   m_ObjectHideFlags: 0

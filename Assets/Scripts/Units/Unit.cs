@@ -19,6 +19,8 @@ public class Unit : MonoBehaviour
          Idle,
          Move,
          Attack,
+         MoveToBuild,
+         BuildProgress,
          Die
      }
     [SerializeField] private int id;
@@ -66,12 +68,22 @@ public class Unit : MonoBehaviour
      [SerializeField] private Builder builder;
      public Builder Builder { get { return builder; } }
      
-     
+     public void LookAt(Vector3 pos)
+     {
+         Vector3 dir = (pos - transform.position).normalized;
+         float angle = Mathf.Atan2(dir.x, dir.z) * Mathf.Rad2Deg;
+        
+         transform.rotation = Quaternion.Euler(0f, angle, 0f);
+     }
      
      
      void Awake()
      {
          navAgent = GetComponent<NavMeshAgent>();
+         if (isBuilder)
+         {
+             builder = GetComponent<Builder>();
+         }
      }
      public void ToggleSelectionVisual(bool flag)
      {
