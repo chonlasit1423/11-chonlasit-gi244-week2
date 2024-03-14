@@ -49,6 +49,7 @@ public class Worker : MonoBehaviour
     
     private void MoveToResourceUpdate()
     {
+        CheckForResource();
         if (Vector3.Distance(transform.position, unit.NavAgent.destination) <= 2f)
         {
             if (curResourceSource != null)
@@ -75,10 +76,13 @@ public class Worker : MonoBehaviour
                     carryType = curResourceSource.RsrcType;
                     amountCarry += gatherAmount;
                 }
+                else 
+                    CheckForResource();
             }
             else //amount is full, go back to deliver at HQ
                 unit.SetState(UnitState.DeliverToHQ);
         }
+        
     }
     
     private void DeliverToHQUpdate()
@@ -106,6 +110,7 @@ public class Worker : MonoBehaviour
 
             //Debug.Log("Delivered");
         }
+        CheckForResource();
     }
     private void CheckForResource()
     {

@@ -34,7 +34,9 @@ public class ResourceSource : MonoBehaviour
     private UnityEvent onRsrcQuantityChange;
     [SerializeField]
     private UnityEvent onInfoQuantityChange;
-    
+
+    public int MaxQuantity { get { return maxQuantity; } }
+
     public void GatherResource(int amountRequest)
     {
         int amountToGive;
