@@ -3648,7 +3648,7 @@ GameObject:
   - component: {fileID: 8584407567069214993}
   - component: {fileID: 3498281081872643227}
   - component: {fileID: 3328104595666609230}
-  - component: {fileID: 6476663666916507245}
+  - component: {fileID: 3542240265441751019}
   m_Layer: 6
   m_Name: Builder
   m_TagString: Unit
@@ -3788,6 +3788,8 @@ MonoBehaviour:
   unitWaitTime: 0.01
   isBuilder: 1
   builder: {fileID: 0}
+  isWorker: 1
+  worker: {fileID: 0}
 --- !u!114 &3498281081872643227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3823,33 +3825,24 @@ MonoBehaviour:
   newBuilding: {fileID: 0}
   ghostBuilding: {fileID: 0}
   inProgressBuilding: {fileID: 0}
---- !u!54 &6476663666916507245
-Rigidbody:
+--- !u!114 &3542240265441751019
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5227177240495252994}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a1059e9aa0ea3f4180bd2fac371b181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  curResourceSource: {fileID: 0}
+  gatherRate: 0.5
+  gatherAmount: 1
+  amountCarry: 0
+  maxCarry: 25
+  carryType: 0
 --- !u!1 &5348547719988546827
 GameObject:
   m_ObjectHideFlags: 0

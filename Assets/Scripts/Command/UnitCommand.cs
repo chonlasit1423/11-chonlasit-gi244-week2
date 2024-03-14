@@ -30,6 +30,7 @@ public class UnitCommand : MonoBehaviour
         UnitsMoveToPosition(hit.point, unit);
         CreateVFXMarker(hit.point, MainUI.instance.SelectionMarker);
     }
+    
     private void TryCommand(Vector2 screenPos)
     {
         Ray ray = cam.ScreenPointToRay(screenPos);
@@ -43,9 +44,27 @@ public class UnitCommand : MonoBehaviour
                 case "Ground":
                     CommandToGround(hit, unitSelect.CurUnit);
                     break;
+                case "Resource":
+                    ResourceCommand(hit, unitSelect.CurUnit);
+                    break;
             }
         }
     }
+    
+    // called when we command units to gather a resource
+    private void UnitsToGatherResource(ResourceSource resource, Unit unit)
+    {
+        if (unit.IsWorker)
+            unit.Worker.ToGatherResource(resource, resource.transform.position);
+        else
+            unit.MoveToPosition(resource.transform.position);
+    }
+    private void ResourceCommand(RaycastHit hit, Unit unit)
+    {
+        UnitsToGatherResource(hit.collider.GetComponent<ResourceSource>(), unit);
+        CreateVFXMarker(hit.transform.position, MainUI.instance.SelectionMarker);
+    }
+
 
     // Start is called before the first frame update
     void Start()
