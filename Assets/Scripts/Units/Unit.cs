@@ -12,17 +12,18 @@ public struct UnitCost
     public int gold;
     public int stone;
 }
+public enum UnitState
+{
+    Idle,
+    Move,
+    Attack,
+    MoveToBuild,
+    BuildProgress,
+    Die
+}
 public class Unit : MonoBehaviour
 {
-    public enum UnitState
-     {
-         Idle,
-         Move,
-         Attack,
-         MoveToBuild,
-         BuildProgress,
-         Die
-     }
+
     [SerializeField] private int id;
      public int ID { get { return id; } set { id = value; } }
      [SerializeField] private string unitName;

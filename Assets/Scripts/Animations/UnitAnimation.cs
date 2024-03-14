@@ -14,13 +14,13 @@ public class UnitAnimation : MonoBehaviour
         anim.SetBool("IsAttack", false);
         switch (u.State)
         {
-            case Unit.UnitState.Idle:
+            case UnitState.Idle:
                 anim.SetBool("IsIdle", true);
                 break;
-            case Unit.UnitState.Move:
+            case UnitState.Move:
                 anim.SetBool("IsMove", true);
                 break;
-            case Unit.UnitState.Attack:
+            case UnitState.Attack:
                 anim.SetBool("IsAttack", true);
                 break;
         }

@@ -73,7 +73,7 @@ public class Builder : MonoBehaviour
     public void BuilderStartFixBuilding(GameObject target)
     {
         inProgressBuilding = target;        
-        unit.SetState(Unit.UnitState.MoveToBuild);
+        unit.SetState(UnitState.MoveToBuild);
     }
     private void StartConstruction(GameObject buildingObj)
     {
@@ -162,7 +162,7 @@ public class Builder : MonoBehaviour
         if ((b.CurHP >= b.MaxHP) && b.IsFunctional)
         {
             inProgressBuilding = null; //Clear this job off his mind
-            unit.SetState(Unit.UnitState.Idle);
+            unit.SetState(UnitState.Idle);
             return;
         }
         //constructing
@@ -183,13 +183,13 @@ public class Builder : MonoBehaviour
                 b.IsFunctional = true;
 
                 inProgressBuilding = null; //Clear this job off his mind
-                unit.SetState(Unit.UnitState.Idle);
+                unit.SetState(UnitState.Idle);
             }
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        if (unit.State == Unit.UnitState.Die)
+        if (unit.State == UnitState.Die)
             return;
 
         if (unit != null)
@@ -197,7 +197,7 @@ public class Builder : MonoBehaviour
             if (other.gameObject == inProgressBuilding)
             {
                 unit.NavAgent.isStopped = true;
-                unit.SetState(Unit.UnitState.BuildProgress);
+                unit.SetState(UnitState.BuildProgress);
             }
         }
     }
@@ -215,7 +215,7 @@ public class Builder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (unit.State == Unit.UnitState.Die)
+        if (unit.State == UnitState.Die)
             return;
 
         if (toBuild) // if this unit is to build something
@@ -235,10 +235,10 @@ public class Builder : MonoBehaviour
 
         switch (unit.State)
         {
-            case Unit.UnitState.MoveToBuild:
+            case UnitState.MoveToBuild:
                 MoveToBuild(inProgressBuilding);
                 break;
-            case Unit.UnitState.BuildProgress:
+            case UnitState.BuildProgress:
                 BuildProgress();
                 break;
         }

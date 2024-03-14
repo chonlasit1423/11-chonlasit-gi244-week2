@@ -11,21 +11,21 @@ public class TestScene : MonoBehaviour
     {
         for (int i = 0; i < units.Length; i++)
         {
-            units[i].State = Unit.UnitState.Idle;
+            units[i].State = UnitState.Idle;
         }
     }
     public void SetMove()
     {
         for (int i = 0; i < units.Length; i++)
         {
-            units[i].State = Unit.UnitState.Move;
+            units[i].State = UnitState.Move;
         }
     }
     public void SetAttack()
     {
         for (int i = 0; i < units.Length; i++)
         {
-            units[i].State = Unit.UnitState.Attack;
+            units[i].State = UnitState.Attack;
         }
     }
 }
