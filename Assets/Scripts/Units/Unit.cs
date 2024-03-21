@@ -16,13 +16,16 @@ public enum UnitState
 {
     Idle,
     Move,
-    Attack,
+    AttackUnit,
     MoveToBuild,
     BuildProgress,
     MoveToResource,
     Gather,
     DeliverToHQ,
     StoreAtHQ,
+    MoveToEnemy,
+    MoveToEnemyBuilding,
+    AttackBuilding,
     Die
 }
 public class Unit : MonoBehaviour
@@ -84,7 +87,19 @@ public class Unit : MonoBehaviour
      [SerializeField]
      private float lastPathUpdateTime;
      public float LastPathUpdateTime { get { return lastPathUpdateTime; } set { lastPathUpdateTime = value; } }
+     [SerializeField]
+     private Unit curEnemyUnitTarget;
+     [SerializeField]
+     private Building curEnemyBuildingTarget;
+
+     [SerializeField]
+     private float attackRate = 1f; //how frequent this unit attacks in second
+
+     [SerializeField]
+     private float lastAttackTime;
      
+     [SerializeField] private float defendRange = 30f; //the range that a unit will defensively auto-attack
+     public float DefendRange { get { return defendRange; } }
      public void LookAt(Vector3 pos)
      {
          Vector3 dir = (pos - transform.position).normalized;
@@ -140,8 +155,162 @@ public class Unit : MonoBehaviour
              SetState(UnitState.Idle);
      }
      
+     protected virtual IEnumerator DestroyObject()
+     {
+         yield return new WaitForSeconds(5f);
+         Destroy(gameObject);
+     }
+
+     protected virtual void Die()
+     {
+         navAgent.isStopped = true;
+
+         SetState(UnitState.Die);
+
+         if (faction != null)
+             faction.AliveUnits.Remove(this);
+
+         InfoManager.instance.ClearAllInfo();
+         //Debug.Log(gameObject + " dies.");
+         StartCoroutine("DestroyObject");
+     }
      
-    // Start is called before the first frame update
+     public void ToAttackUnit(Unit target)
+     {
+         if (curHP <= 0 || state == UnitState.Die)
+             return;
+         curEnemyUnitTarget = target;
+         SetState(UnitState.MoveToEnemy);
+     }
+     
+     public void TakeDamage(Unit enemy, int damage)
+     {
+         //I'm already dead
+         if (curHP <= 0 || state == UnitState.Die)
+             return;
+
+         curHP -= damage;
+
+         if (curHP <= 0)
+         {
+             curHP = 0;
+             Die();
+         }
+
+         if (!IsWorker) //if this unit is not worker
+             ToAttackUnit(enemy); //always counter-attack
+     }
+     public void MoveToEnemyUpdate()
+     {
+         // if our target is null, go idle
+         if (curEnemyUnitTarget == null)
+         {
+             SetState(UnitState.Idle);
+             return;
+         }
+         if (Time.time - lastPathUpdateTime > pathUpdateRate)
+         {
+             lastPathUpdateTime = Time.time;
+             navAgent.isStopped = false;
+
+             if (curEnemyUnitTarget != null)
+                 navAgent.SetDestination(curEnemyUnitTarget.transform.position);
+         }
+
+         if (Vector3.Distance(transform.position, curEnemyUnitTarget.transform.position) <= WeaponRange)
+             SetState(UnitState.AttackUnit);
+     }
+     protected void AttackUpdate()
+     {
+         // if our target is dead, go idle
+         if (curEnemyUnitTarget == null || curEnemyUnitTarget.CurHP <= 0)
+         {
+             //DisableAllWeapons();
+             SetState(UnitState.Idle);
+             return;
+         }
+
+         // if we're still moving, stop
+         if (!navAgent.isStopped)
+             navAgent.isStopped = true;
+
+         // look at the enemy
+         LookAt(curEnemyUnitTarget.transform.position);
+
+         // attack every 'attackRate' seconds
+         if (Time.time - lastAttackTime > attackRate)
+         {
+             lastAttackTime = Time.time;
+             curEnemyUnitTarget.TakeDamage(this, UnityEngine.Random.Range(minWpnDamage, maxWpnDamage + 1));
+         }
+
+         // if we're too far away, move towards the enemy
+         if (Vector3.Distance(transform.position, curEnemyUnitTarget.transform.position) > weaponRange)
+         {
+             SetState(UnitState.MoveToEnemy);
+             //Debug.Log($"{unitName} - From Attack Update");
+         }
+     }
+     // move to an enemy building and attack them
+     public void ToAttackBuilding(Building target)
+     {
+         curEnemyBuildingTarget = target;
+         SetState(UnitState.MoveToEnemyBuilding);
+     }
+     private void MoveToEnemyBuildingUpdate()
+     {
+         if (curEnemyBuildingTarget == null)
+         {
+             SetState(UnitState.Idle);
+             return;
+         }
+
+         if (Time.time - lastPathUpdateTime > pathUpdateRate)
+         {
+             lastPathUpdateTime = Time.time;
+             navAgent.isStopped = false;
+             navAgent.SetDestination(curEnemyBuildingTarget.transform.position);
+         }
+         if ((Vector3.Distance(transform.position, curEnemyBuildingTarget.transform.position) - 4f) <= WeaponRange)
+         {
+             SetState(UnitState.AttackBuilding);
+         }
+     }
+     private void AttackBuildingUpdate()
+     {
+         // if our target is dead, go idle
+         if (curEnemyBuildingTarget == null)
+         {
+             SetState(UnitState.Idle);
+             return;
+         }
+
+         // if we're still moving, stop
+         if (!navAgent.isStopped)
+         {
+             navAgent.isStopped = true;
+         }
+
+         // look at the enemy
+         LookAt(curEnemyBuildingTarget.transform.position);
+
+         // attack every 'attackRate' seconds
+         if (Time.time - lastAttackTime > attackRate)
+         {
+             lastAttackTime = Time.time;
+
+             curEnemyBuildingTarget.TakeDamage(UnityEngine.Random.Range(minWpnDamage, maxWpnDamage + 1));
+         }
+         // if we're too far away, move towards the enemy's building
+         if ((Vector3.Distance(transform.position, curEnemyBuildingTarget.transform.position) - 4f) > WeaponRange)
+         {
+             SetState(UnitState.MoveToEnemyBuilding);
+         }
+     }
+
+    
+
+     // Start is called before the first frame update
     void Start()
     {
         
@@ -154,6 +323,18 @@ public class Unit : MonoBehaviour
         {
             case UnitState.Move:
                 MoveUpdate();
+                break;
+            case UnitState.MoveToEnemy:
+                MoveToEnemyUpdate();
+                break;
+            case UnitState.AttackUnit:
+                AttackUpdate();
+                break;
+            case UnitState.MoveToEnemyBuilding :
+                MoveToEnemyBuildingUpdate();
+                break;
+            case UnitState.AttackBuilding :
+                AttackBuildingUpdate();
                 break;
         }
     }

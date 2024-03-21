@@ -86,6 +86,23 @@ public class InfoManager : MonoBehaviour
         hpTxt.text = $"{r.Quantity}/{r.MaxQuantity}";
     }
     
+    public void ShowEnemyAllInfo(Unit unit)
+    {
+        SetPic(unit.UnitPic);
+        nameTxt.text = unit.UnitName;
+
+        hpIcon.color = Color.white;
+        hpTxt.text = $"{unit.CurHP}/{unit.MaxHP}";
+    }
+    
+    public void ShowEnemyAllInfo(Building b)
+    {
+        SetPic(b.StructurePic);
+        nameTxt.text = b.StructureName;
+
+        hpIcon.color = Color.white;
+        hpTxt.text = $"{b.CurHP}/{b.MaxHP}";
+    }
     // Start is called before the first frame update
     void Start()
     {
