@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -3734570728713498155, guid: 4ec9192da70fe2045bfaceadabf9b797, type: 3}
+      propertyPath: id
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3734570728713498155, guid: 4ec9192da70fe2045bfaceadabf9b797, type: 3}
       propertyPath: unitName
       value: Fr. Regular
       objectReference: {fileID: 0}

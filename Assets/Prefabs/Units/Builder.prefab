@@ -3767,7 +3767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72587d62ce3050c4b9dea581ee96cda3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
+  id: 0
   unitName: 
   unitPic: {fileID: 21300000, guid: 49f38a9dd5d2d964b9eecd27f4a05679, type: 3}
   curHP: 0

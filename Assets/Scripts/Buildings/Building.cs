@@ -22,6 +22,10 @@ public class Building : Structure
 
     [SerializeField] private bool isHQ;
     public bool IsHQ { get { return isHQ; } }
+    public bool IsHousing { get { return isHousing; } }
+    [SerializeField] private bool isBarrack;
+    public  bool IsBarrack  {get { return isBarrack; } }
+
 
     [SerializeField] private float intoTheGround = 5f;
     public float IntoTheGround { get { return intoTheGround; } }
@@ -30,6 +34,7 @@ public class Building : Structure
     public float Timer { get { return timer; } set { timer = value; } }
     private float waitTime = 0.5f; //How fast it will be construct, higher is longer
     public float WaitTime { get { return waitTime; } set { waitTime = value; } }
+    [SerializeField] private bool isHousing;
     
     
     public void ToCreateUnit(int i)
@@ -66,10 +71,10 @@ public class Building : Structure
     {
         int id = recruitList[0].ID;
 
-        if (unitPrefabs[id] == null)
+        if (faction.UnitPrefabs[id] == null)
             return;
 
-        GameObject unitObj = Instantiate(unitPrefabs[id], 
+        GameObject unitObj = Instantiate(faction.UnitPrefabs[id], 
                                          spawnPoint.position,
                                          Quaternion.Euler(0f, 180f, 0f),
                                             faction.UnitsParent);
