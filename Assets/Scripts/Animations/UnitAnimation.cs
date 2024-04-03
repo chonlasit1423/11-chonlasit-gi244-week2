@@ -12,8 +12,8 @@ public class UnitAnimation : MonoBehaviour
         anim.SetBool("IsIdle", false);
         anim.SetBool("IsMove", false);
         anim.SetBool("IsAttack", false);
-        anim.SetBool("IsDie", false);
-        anim.SetBool("IsGather", false);
+        /*anim.SetBool("IsDie", false);
+        anim.SetBool("IsGather", false);*/
 
         switch (u.State)
         {
@@ -26,12 +26,12 @@ public class UnitAnimation : MonoBehaviour
             case UnitState.AttackUnit:
                 anim.SetBool("IsAttack", true);
                 break;
-            case UnitState.Die:
+            /*case UnitState.Die:
                 anim.SetBool("IsDie", true);
                 break;
             case UnitState.Gather:
                 anim.SetBool("IsGather", true);
-                break;
+                break;*/
         }
     }
     
