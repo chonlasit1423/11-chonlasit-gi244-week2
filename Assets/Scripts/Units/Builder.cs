@@ -163,7 +163,6 @@ public class Builder : MonoBehaviour
         {
             inProgressBuilding = null; //Clear this job off his mind
             unit.SetState(UnitState.Idle);
-            return;
         }
         //constructing
         b.Timer += Time.deltaTime;
@@ -184,6 +183,9 @@ public class Builder : MonoBehaviour
 
                 inProgressBuilding = null; //Clear this job off his mind
                 unit.SetState(UnitState.Idle);
+                unit.Faction.UpdateHousingLimit();
+
+                
             }
         }
     }
