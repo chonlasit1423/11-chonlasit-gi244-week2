@@ -3825,13 +3825,13 @@ MonoBehaviour:
   toBuild: 0
   showGhost: 0
   buildingList:
-  - {fileID: 5622076475031477337, guid: 504b9c18e43034249ae9e5eccbd1f941, type: 3}
-  - {fileID: 1227681272056947765, guid: aa55957a38522474fbd8f9e31c4074d7, type: 3}
-  - {fileID: 1227681272056947765, guid: 444b65b549d0ec04fac7795197923c91, type: 3}
+  - {fileID: 5622076475031477337, guid: 13976f84c0a18684498fbd6138ebb3d7, type: 3}
+  - {fileID: 1227681272056947765, guid: 5235cec6021bb2a4980d418db26b0a80, type: 3}
+  - {fileID: 1227681272056947765, guid: cca3bf84a5a2c23458c2c54c981d5df9, type: 3}
   ghostBuildingList:
-  - {fileID: 5622076475031477337, guid: ba29fa5a9020b4549b6e3818c128b5b6, type: 3}
-  - {fileID: 1227681272056947765, guid: b76238b4a13d0b14493723bb15da506d, type: 3}
-  - {fileID: 8066750515129252155, guid: 8fcd3c5d14c1275479955f168d650400, type: 3}
+  - {fileID: 5622076475031477337, guid: 569e975703c1b384994244d9bdfdb0ea, type: 3}
+  - {fileID: 1227681272056947765, guid: 738261b0d1abb7d4bb52e0f703573d8e, type: 3}
+  - {fileID: 8066750515129252155, guid: 56a1a2ad5545c9446a3223d96172fba9, type: 3}
   newBuilding: {fileID: 0}
   ghostBuilding: {fileID: 0}
   inProgressBuilding: {fileID: 0}
