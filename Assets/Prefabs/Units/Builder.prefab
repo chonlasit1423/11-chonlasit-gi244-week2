@@ -3770,7 +3770,7 @@ MonoBehaviour:
   id: 0
   unitName: Builder
   unitPic: {fileID: 21300000, guid: 49f38a9dd5d2d964b9eecd27f4a05679, type: 3}
-  curHP: 0
+  curHP: 100
   maxHP: 100
   moveSpeed: 5
   minWpnDamage: 0
