@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 1934376133982415952}
   - component: {fileID: 6957188438020663881}
   - component: {fileID: 8550909332625683007}
+  - component: {fileID: 3584809126508851699}
   m_Layer: 7
   m_Name: Fr_Headquarter
   m_TagString: Building
@@ -170,6 +171,18 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 8.02, z: 9.32}
   m_TimeToStationary: 0.5
+--- !u!114 &3584809126508851699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622076475031477337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aaecf734c23e3b4aa6e13bcd39b4ee7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6351448830019472223
 GameObject:
   m_ObjectHideFlags: 0
